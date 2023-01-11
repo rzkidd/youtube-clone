@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
@@ -13,8 +14,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <div class="d-flex flex-column justify-content-center align-items-center mt-5">
+        <div class="icon-upload rounded-circle d-flex justify-content-center align-items-center ">
+            <i class="fa-solid fa-upload " ></i>
+        </div>
+        <div class="mt-3 text-center">
+            <p>Drag and drop video files to upload</p>
+            <p class="text-muted">Your videos will be private until you publish them.</p>
+        </div>
+
+        <?php ActiveForm::begin([
+            'options' => ['enctype' => 'multipart/form-data']
+        ]); ?>
+        <button class="btn btn-primary btn-file">
+            Select Files
+            <input type="file" name="video" id="video-input">
+        </button>
+        <?php ActiveForm::end(); ?>
+    </div>
 
 </div>
