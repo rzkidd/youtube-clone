@@ -34,6 +34,11 @@ class Video extends \yii\db\ActiveRecord
      * @var UploadedFile
      */
     public $video;
+    /**
+     * Summary of Video
+     * @var UploadedFile
+     */
+    public $thumbnail;
     
     /**
      * {@inheritdoc}
@@ -74,6 +79,26 @@ class Video extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getVideoLink()
+    {
+        return Yii::$app->params['frontendUrl'] . 'storage/videos/' . $this->video_id . '.mp4';
+    }
+    
+    public function getThumbnailLink()
+    {
+        return $this->has_thumbnail ? 
+            Yii::$app->params['frontendUrl'] . 'storage/thumbnails/' . $this->video_id . '.jpg'
+            : '';
+    }
+
+    public function getStatusLabels()
+    {
+        return [
+            self::STATUS_UNLISTED => 'Unlisted',
+            self::STATUS_PUBLISHED => 'Published',
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -90,6 +115,7 @@ class Video extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
+            'thumbnail' => 'Thumbnail'
         ];
     }
 
@@ -122,6 +148,11 @@ class Video extends \yii\db\ActiveRecord
             $this->title = $this->video->name;
             $this->video_name = $this->video->name;
         }
+
+        // whether has thumbnail
+        if ($this->thumbnail) {
+            $this->has_thumbnail = true;
+        }
         // save the data
         $saved = parent::save($runValidation, $attributeNames);
 
@@ -136,6 +167,14 @@ class Video extends \yii\db\ActiveRecord
                 FileHelper::createDirectory(dirname($videoPath));
             }
             $this->video->saveAs($videoPath);
+        }
+
+        if ($this->thumbnail) {
+            $thumbnailPath = Yii::getAlias('@frontend/web/storage/thumbnails/' . $this->video_id . '.jpg');
+            if (!is_dir(dirname($thumbnailPath))) {
+                FileHelper::createDirectory(dirname($thumbnailPath));
+            }
+            $this->thumbnail->saveAs($thumbnailPath);
         }
 
         return true;
