@@ -12,6 +12,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
+    'name' => 'Studio',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',

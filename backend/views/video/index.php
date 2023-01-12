@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="video-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="text-light"><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Create Video', ['create'], ['class' => 'btn btn-success']) ?>
@@ -42,6 +42,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Url::toRoute([$action, 'video_id' => $model->video_id]);
                  }
             ],
+        ],
+        'options' => [
+            'class' => 'text-light'
+        ],
+        'tableOptions' => [
+            'class' => 'table table-dark',
+            'id' => 'table_video'
         ],
     ]); ?>
 
