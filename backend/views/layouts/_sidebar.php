@@ -2,7 +2,7 @@
 
 use yii\bootstrap5\Nav;
 ?>
-<aside class="shadow">
+<aside class="shadow border-end border-secondary">
     <div class="d-flex flex-column align-items-center my-4">
         <div class="rounded-circle w-50 bg-secondary ratio ratio-1x1"></div>
         <div class="mt-3">

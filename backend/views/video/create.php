@@ -10,13 +10,13 @@ $this->title = 'Create Video';
 $this->params['breadcrumbs'][] = ['label' => 'Videos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="video-create">
+<div class="video-create text-light">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="d-flex flex-column justify-content-center align-items-center mt-5">
         <div class="icon-upload rounded-circle d-flex justify-content-center align-items-center ">
-            <i class="fa-solid fa-upload " ></i>
+            <i class="fa-solid fa-upload text-dark" ></i>
         </div>
         <div class="mt-3 text-center">
             <p>Drag and drop video files to upload</p>

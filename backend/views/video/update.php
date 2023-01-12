@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Videos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'video_id' => $model->video_id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="video-update">
+<div class="video-update text-light">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

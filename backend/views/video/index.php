@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'text-light'
         ],
         'tableOptions' => [
-            'class' => 'table table-dark',
+            'class' => 'table',
             'id' => 'table_video'
         ],
     ]); ?>
