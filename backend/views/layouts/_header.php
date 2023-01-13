@@ -16,7 +16,7 @@ NavBar::begin([
 ]);
 $menuItems = [
     [
-        'label' => 'CREATE', 
+        'label' => '<i class="fa-solid fa-video"></i> CREATE', 
         'url' => ['/video/create'], 
         'options' => [
             'id' => 'create_nav',
@@ -24,7 +24,8 @@ $menuItems = [
         ],
         'linkOptions' => [
             'class' => 'border border-secondary border-1 rounded py-2 px-3 align-self-center fw-bold text-light'
-        ]
+        ],
+        'encode' => false
     ],
 ];
 // if (Yii::$app->user->isGuest) {

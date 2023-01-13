@@ -61,10 +61,10 @@ aside .nav-pills .nav-item .nav-link.active {
     opacity: 0;
 }
 
-#create_nav > a::before {
-    content: "\f03d";
+#create_nav > a > i {
+    /* content: "\f03d";
     font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
+    font-weight: 900; */
     margin-right: 0.5rem;
     color: red;
 }
@@ -82,6 +82,24 @@ a[href="/site/logout"]::before {
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     margin-right: 0.5rem;
+}
+
+a[href="/site/index"]::before {
+    content: "\f0db";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+a[href="/video/index"]::before {
+    content: "\f03d";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 1.5rem;
+    margin-right: 1.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 #table_video thead tr th a, 

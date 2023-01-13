@@ -14,6 +14,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php if(isset($model->errors['video'])): ?>
+        <div class="">
+            <?php foreach($model->errors['video'] as $error) : ?>
+            <div class="alert alert-danger mb-1"><?= $error ?></div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
     <div class="d-flex flex-column justify-content-center align-items-center mt-5">
         <div class="icon-upload rounded-circle d-flex justify-content-center align-items-center ">
             <i class="fa-solid fa-upload text-dark" ></i>
