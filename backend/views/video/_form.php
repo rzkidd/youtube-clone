@@ -1,6 +1,7 @@
 <?php
 
 use backend\assets\TagsInputAsset;
+use yii\bootstrap5\ActiveField;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
@@ -15,13 +16,23 @@ TagsInputAsset::register($this);
 
     <?php $form = ActiveForm::begin([
         'options' => [
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
+        ],
+        'fieldClass' => ActiveField::class,
+        'fieldConfig' => [
+            'inputOptions' => [
+                'class' => 'form-control text-light bg-transparent border-secondary input-field'
+            ]
         ]
     ]); ?>
 
     <div class="row">
         <div class="col-sm-8">
-            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title', [
+                'inputOptions' => [
+                    'placeholder' => 'Add a title that describes your video'
+                ]
+            ])->textInput(['maxlength' => true]) ?>
         
             <?php if(isset($model->errors['title'])): ?>
             <div class="mb-3">
@@ -31,7 +42,11 @@ TagsInputAsset::register($this);
             </div>
             <?php endif; ?>
 
-            <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'description', [
+                'inputOptions' => [
+                    'placeholder' => 'Tell viewers about your video'
+                ]
+            ])->textarea(['rows' => 6]) ?>
 
             <?php if(isset($model->errors['description'])): ?>
             <div class="mb-3">
@@ -41,10 +56,18 @@ TagsInputAsset::register($this);
             </div>
             <?php endif; ?>
 
-            <label for="thumbnail" class="form-label"><?= $model->getAttributeLabel('thumbnail') ?></label>
-            <div class="input-group mb-3">
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail">
-                <label class="input-group-text" for="thumbnail">Browse</label>
+            <div class="mb-3">
+                <label for="thumbnail-input" class="form-label d-block"><?= $model->getAttributeLabel('thumbnail') ?></label>
+                <div class="form-text mb-2">
+                    Select or upload a picture that shows what's in your video. A good thumbnail stands out and draws viewers' attention.
+                </div>
+                <button class="btn btn-transparent btn-file text-muted border-secondary thumbnail-input">
+                    <div class="d-flex flex-column justify-content-center align-items-center py-3">
+                        <i class="fa-regular fa-image fs-4"></i>
+                        Upload thumbnail
+                        <input type="file" name="thumbnail" id="thumbnail-input">
+                    </div>
+                </button>
             </div>
             
             <?php if(isset($model->errors['thumbnail'])): ?>
@@ -57,22 +80,37 @@ TagsInputAsset::register($this);
         
             <?= $form->field($model, 'tags', [
                 // 'options'
-                'inputOptions' => ['data-role' => 'tagsinput']
+                'inputOptions' => [
+                    'data-role' => 'tagsinput',
+                    'placeholder' => 'Add tag'
+                ]
             ])->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-sm-4">
-            <div class="ratio ratio-16x9">
-                <video src="<?= $model->getVideoLink() ?>" allowfullscreen controls poster="<?= $model->getThumbnailLink() ?>"></video>
+            <div class="card-video card p-0 mb-3">
+                <div class="ratio ratio-16x9">
+                    <video src="<?= $model->getVideoLink() ?>" allowfullscreen controls poster="<?= $model->getThumbnailLink() ?>" class="rounded-top"></video>
+                </div>
+                <div class="px-3">
+                    <div class="my-3 d-flex align-items-center justify-content-between">
+                        <div>
+                            <div class="text-muted">Video Link</div>
+                            <a href="<?= $model->getVideoLink() ?>">Open Video</a>
+                        </div>
+                        <a href="#" id="copy-icon" class="fs-3 text-muted" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Copy" data-link="<?= $model->getVideoLink() ?>"><i class="fa-regular fa-clipboard "></i></a>
+                    </div>
+                    <div class="mb-3">
+                        <div class="text-muted">Video Name</div>
+                        <div><?= $model->video_name ?></div>
+                    </div>
+                </div>
             </div>
-            <div class="my-3">
-                <div class="text-muted">Video Link</div>
-                <a href="<?= $model->getVideoLink() ?>">Open Video</a>
-            </div>
-            <div class="mb-3">
-                <div class="text-muted">Video Name</div>
-                <div><?= $model->video_name ?></div>
-            </div>
-            <?= $form->field($model, 'status')->dropDownList($model->getStatusLabels()) ?>
+            <?= $form->field($model, 'status')->label('Visibility')->dropDownList($model->getStatusLabels(), [
+                'class' => 'form-select border-secondary input-field',
+                // 'options' => [
+                //     'Unlisted' => ['class' => 'text-dark']
+                // ]
+            ]) ?>
         </div>
     </div>
 

@@ -1,23 +1,27 @@
 :root {
-    --header-bg-color: #282828;
+    --bg-color: #282828;
+    --hover-bg-color: #202020;
+    --font-family: "Roboto", "Noto", sans-serif
 }
 
 html, body {
     height: 100%;
+    font-family: var(--font-family);
 }
 
 main, .content-wrapper {
     flex: 1;
-    background-color: var(--header-bg-color);
+    background-color: var(--bg-color);
 }
 
-header .navbar {
-    background-color: var(--header-bg-color);
+header .navbar, .sub-header {
+    background-color: var(--bg-color);
     color: #fff;
+    z-index: 999;
 }
 
 aside {
-    background-color: var(--header-bg-color);
+    background-color: var(--bg-color);
     min-width: 250px;
 }
 
@@ -102,14 +106,52 @@ a[href="/video/index"]::before {
     margin-bottom: auto;
 }
 
-#table_video thead tr th a, 
-#table_video tbody tr td a,
-#table_video tbody tr td
+#table_video thead tr th a
 {
-    color: #fff;
+    color: #6c757d;
     text-decoration: none;
 }
 
-#table_video {
+#table_video tbody tr:hover{
+    background-color: var(--hover-bg-color);
+}
+
+a.video-title:hover {
+    text-decoration: underline !important;
+}
+
+.video-row .video-options {
+    z-index: 9999;
+    bottom: 0;
+    transform: scale(0);
+}
+
+.video-options a i:hover, #copy-icon:hover{
+    color: #fff !important;
+}
+
+input {
+    background-color: var(--bg-color);
+}
+
+.thumbnail-input:hover {
+    background-color: var(--hover-bg-color);
+    color: #fff !important;
+}
+
+.input-field:hover, .bootstrap-tagsinput:hover {
+    border: 1px solid #fff !important;
+}
+
+.card-video {
+    background-color: var(--hover-bg-color);
+}
+
+#video-status {
     background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+}
+
+#video-status option {
+    color: #000;
 }

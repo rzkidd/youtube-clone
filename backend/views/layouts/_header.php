@@ -43,7 +43,7 @@ $menuItems[] = [
     'items' => [
         '<div class="d-flex align-items-center px-3">
             <div class="rounded-circle bg-secondary ratio ratio-1x1 me-2" style="width: 55px"></div>
-            <div class="">Nama Channel</div>
+            <div class="">' . Yii::$app->user->identity->username . '</div>
         </div>',
         '<div class="dropdown-divider"></div>',
         [
