@@ -81,11 +81,8 @@ aside .nav-pills .nav-item .nav-link.active {
     left: auto
 }
 
-a[href="/site/logout"]::before {
-    content: "\f2f6";
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    margin-right: 0.5rem;
+#w5 {
+    background-color: var(--hover-bg-color) !important;
 }
 
 a[href="/site/index"]::before {
@@ -134,10 +131,6 @@ input {
     background-color: var(--bg-color);
 }
 
-.thumbnail-input:hover {
-    background-color: var(--hover-bg-color);
-    color: #fff !important;
-}
 
 .input-field:hover, .bootstrap-tagsinput:hover {
     border: 1px solid #fff !important;
@@ -154,4 +147,13 @@ input {
 
 #video-status option {
     color: #000;
+}
+
+.thumbnail-input:hover {
+    background-color: var(--hover-bg-color);
+    color: #fff !important;
+}
+
+.thumbnail-options a:hover {
+    color: #fff !important;
 }

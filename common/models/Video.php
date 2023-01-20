@@ -179,7 +179,6 @@ class Video extends \yii\db\ActiveRecord
                 FileHelper::createDirectory(dirname($thumbnailPath));
             }
             $this->thumbnail->saveAs($thumbnailPath);
-
             Image::getImagine()
                 ->open($thumbnailPath)
                 ->thumbnail(new Box(1280, 1280))

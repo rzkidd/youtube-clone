@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap5\ActiveField;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <?php $form = ActiveForm::begin([
             'options' => [
                 'enctype' => 'multipart/form-data',
+                'id' => 'update-video-form'
             ],
             'fieldClass' => ActiveField::class,
             'fieldConfig' => [
@@ -28,7 +30,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="sub-header d-flex justify-content-between py-2 position-sticky top-0">
         <h3><?= Html::encode($this->title) ?></h3>
         <div class="d-flex align-items-center">
-            <a href="#" class="text-decoration-none me-3 fw-bold">UNDO CHANGES</a>
+            <a href="#" class="text-decoration-none me-3 fw-bold" data-bs-toggle="undo-changes">UNDO CHANGES</a>
             <div class="form-group">
                 <?= Html::submitButton('SAVE', ['class' => 'btn btn-primary text-dark fw-bold', 'id' => 'update-video-submit']) ?>
             </div>
@@ -37,6 +39,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'form' => $form
     ]) ?>
 
     <?php ActiveForm::end(); ?>

@@ -45,8 +45,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'label' => 'Visibility',
                 'content' => function ($model) {
-                        return '<i class="fa-regular fa-eye-slash text-muted"></i> ' . $model->getStatusLabels()[$model->status];
-                    }
+                    return '<div class="row align-items-center">
+                                <div class="col-md-2">' . 
+                                    (($model->getStatusLabels()[$model->status] == "Published") ? 
+                                        '<i class="fa-regular fa-eye text-success"></i> ' : 
+                                        '<i class="fa-regular fa-eye-slash text-muted"></i> ') . 
+                                '</div>
+                                <div class="col-auto">' . 
+                                    $model->getStatusLabels()[$model->status] . 
+                                '</div>
+                            </div>';
+                }
             ],
             //'has_thumbnail:boolean',
             //'video_name',
@@ -91,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'd-none'
         ],
         'tableOptions' => [
-            'class' => 'table  text-muted',
+            'class' => 'table text-muted border-secondary border-top',
             'id' => 'table_video'
         ],
         'rowOptions' => [

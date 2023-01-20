@@ -41,17 +41,49 @@ $menuItems = [
 $menuItems[] = [
     'label' => '<div class="rounded-circle w-100 bg-secondary ratio ratio-1x1"></div>',
     'items' => [
-        '<div class="d-flex align-items-center px-3">
+        '<div class="d-flex align-items-center px-3 py-2">
             <div class="rounded-circle bg-secondary ratio ratio-1x1 me-2" style="width: 55px"></div>
             <div class="">' . Yii::$app->user->identity->username . '</div>
         </div>',
-        '<div class="dropdown-divider"></div>',
+        '<div class="dropdown-divider bg-secondary"></div>',
         [
-            'label' => 'Sign out', 
+            'label' => '
+            <div class="row">
+                <div class="col-md-2">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                <div class="col-auto">Your channel</div>
+            </div>
+            ', 
+            'url' => ['#'],
+            'encode' => false
+        ],
+        [
+            'label' => '
+            <div class="row">
+                <div class="col-md-2">
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+                <div class="col-auto">Youtube</div>
+            </div>
+            ', 
+            'url' => Yii::$app->params['frontendUrl'],
+            'encode' => false
+        ],
+        [
+            'label' => '
+            <div class="row">
+                <div class="col-md-2">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                </div>
+                <div class="col-auto">Sign out</div>
+            </div>
+            ', 
             'url' => ['/site/logout'], 
             'linkOptions' => [
                 'data-method' => 'post',
-            ]
+            ],
+            'encode' => false
         ],
     ],
     'encode' => false,
