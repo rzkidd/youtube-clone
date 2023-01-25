@@ -134,6 +134,15 @@ class Video extends \yii\db\ActiveRecord
     }
 
     /**
+     * Summary of getViews
+     * @return Yii\db\ActiveQuery
+     */
+    public function getViews()
+    {
+        return $this->hasMany(VideoView::class, ['video_id' => 'video_id']);
+    }
+
+    /**
      * {@inheritdoc}
      * @return \common\models\query\VideoQuery the active query used by this AR class.
      */
@@ -142,6 +151,12 @@ class Video extends \yii\db\ActiveRecord
         return new \common\models\query\VideoQuery(get_called_class());
     }
 
+    /**
+     * Summary of save
+     * @param mixed $runValidation
+     * @param mixed $attributeNames
+     * @return bool
+     */
     public function save($runValidation = true, $attributeNames = null)
     {
         $isInsert = $this->isNewRecord; // whether create or update
@@ -186,5 +201,22 @@ class Video extends \yii\db\ActiveRecord
         }
 
         return true;
+    }
+
+    /**
+     * Summary of afterDelete
+     * @return void
+     */
+    public function afterDelete()
+    {
+        parent::afterDelete();
+
+        $videoPath = Yii::getAlias('@frontend/web/storage/videos/' . $this->video_id . '.mp4');
+        $thumbnailPath = Yii::getAlias('@frontend/web/storage/thumbnails/' . $this->video_id . '.jpg');
+        unlink($videoPath);
+
+        if (file_exists($thumbnailPath)){
+            unlink($thumbnailPath);
+        }
     }
 }

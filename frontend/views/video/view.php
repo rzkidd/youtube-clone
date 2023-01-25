@@ -38,7 +38,7 @@ use yii\helpers\Url;
 
         <div class="w-100 rounded-3 description-box mt-2 p-3">
             <div class="d-flex fw-bold">
-                <div class="me-3">123 views</div>
+                <div class="me-3"><?= $model->getViews()->count() ?> views</div>
                 <div><?= Yii::$app->formatter->asRelativeTime($model->created_at) ?></div>
             </div>
             <div class="mt-2"><?= $model->description ?></div>
@@ -57,7 +57,7 @@ use yii\helpers\Url;
                     <h6 class="card-title" style="font-size: 0.875rem;"><?= StringHelper::truncateWords($video->title, 7) ?></h6>
                     <div class="card-text text-muted mt-1" style="font-size: 0.75rem;"><?= $video->createdBy->username ?></div>
                     <div class="card-text text-muted" style="font-size: 0.75rem;">
-                        <span>123 views &middot</span>    
+                        <span><?= $video->getViews()->count() ?> views &middot</span>    
                         <?= Yii::$app->formatter->asRelativeTime($video->created_at) ?>
                     </div>
                 </div>
