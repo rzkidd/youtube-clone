@@ -14,6 +14,7 @@ NavBar::begin([
         'class' => 'container-fluid ms-5'
     ]
 ]);
+
 if (Yii::$app->user->isGuest){
     $menuItems = [
         [
@@ -113,6 +114,7 @@ if (Yii::$app->user->isGuest){
     ];
 }
 
+// }
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav ms-auto mb-2 mb-md-0'],
     'items' => $menuItems,

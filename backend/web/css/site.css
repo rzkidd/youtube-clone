@@ -81,7 +81,7 @@ aside .nav-pills .nav-item .nav-link.active {
     left: auto
 }
 
-#w5 {
+.dropdown-menu-dark {
     background-color: var(--hover-bg-color) !important;
 }
 
