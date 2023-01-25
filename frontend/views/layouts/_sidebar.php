@@ -20,7 +20,7 @@ use yii\bootstrap5\Nav;
                     </div>
                 </div>
                 ',
-                'url' => ['/video'],
+                'url' => ['/video/index'],
                 'encode' => false
             ],
             [

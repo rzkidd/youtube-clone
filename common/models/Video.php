@@ -143,6 +143,25 @@ class Video extends \yii\db\ActiveRecord
     }
 
     /**
+     * Summary of getLikes
+     * @return Yii\db\ActiveQuery
+     */
+    public function getLikes()
+    {
+        return $this->hasMany(VideoLike::class, ['video_id' => 'video_id']);
+    }
+
+    public function liked()
+    {
+        return VideoLike::find()->isLikedDisliked($this->video_id, Yii::$app->user->id)->andWhere(['type' => VideoLike::TYPE_LIKE])->one();
+    }
+    
+    public function disliked()
+    {
+        return VideoLike::find()->isLikedDisliked($this->video_id, Yii::$app->user->id)->andWhere(['type' => VideoLike::TYPE_DISLIKE])->one();
+    }
+
+    /**
      * {@inheritdoc}
      * @return \common\models\query\VideoQuery the active query used by this AR class.
      */

@@ -1,9 +1,12 @@
 <?php 
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
+
 /** 
  * @var \common\models\Video $model
  * @var \common\models\Video $videos
+ * @var \yii\web\View $this
  */
 
 ?>
@@ -22,17 +25,12 @@ use yii\helpers\Url;
                 <div class="text-muted">1M subcribers</div>
             </div>
             <button type="button" class="btn btn-light rounded-pill mx-3">Subscribe</button>
-            <div class="video-likes d-flex justify-content-between ms-auto">
-                <a href="#" class="text-decoration-none text-light">
-                    <span class="likes border-end ps-3 pe-2 py-2">
-                        <i class="fa-regular fa-thumbs-up"></i> 2.2K 
-                    </span>
-                </a>
-                <a href="#" class="text-decoration-none text-light">
-                    <span class="dislikes pe-3 ps-2 py-2">
-                        <i class="fa-regular fa-thumbs-down"></i> 
-                    </span>
-                </a>
+            <div class="video-likes d-flex justify-content-between align-items-center ms-auto">
+                <?php Pjax::begin(); ?>
+                <?= $this->render('_like_dislike', [
+                    'model' => $model
+                ]); ?>
+                <?php Pjax::end() ?>
             </div>
         </div>
 
@@ -54,7 +52,9 @@ use yii\helpers\Url;
             </a>
             <div class=" px-3">
                 <div>
-                    <h6 class="card-title" style="font-size: 0.875rem;"><?= StringHelper::truncateWords($video->title, 7) ?></h6>
+                    <a href="<?= Url::to(['/video/view', 'video_id' => $video->video_id]) ?>" class="text-decoration-none text-light">
+                        <h6 class="card-title " style="font-size: 0.875rem;"><?= StringHelper::truncateWords($video->title, 7) ?></h6>
+                    </a>
                     <div class="card-text text-muted mt-1" style="font-size: 0.75rem;"><?= $video->createdBy->username ?></div>
                     <div class="card-text text-muted" style="font-size: 0.75rem;">
                         <span><?= $video->getViews()->count() ?> views &middot</span>    

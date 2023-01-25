@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\Video;
-
+use common\models\VideoLike;
 use yii\web\NotFoundHttpException;
 use function PHPUnit\Framework\throwException;
 
@@ -21,6 +21,33 @@ use function PHPUnit\Framework\throwException;
  */
 class VideoController extends Controller
 {
+    public function behaviors()
+    {
+        return array_merge(
+            // parent::behaviors(),
+            [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'only' => ['like', 'dislike'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ]
+                    ]
+                ],
+                // 'verbs' => [
+                //     'class' => VerbFilter::class,
+                //     'actions' => [
+                //         'like' => ['post'],
+                //         'dislike' => ['post'],
+                //     ],
+                // ],
+                
+            ]
+        );
+    }
+    
     /**
      * Displays homepage.
      *
@@ -66,5 +93,70 @@ class VideoController extends Controller
             'model' => $model,
             'videos' => $videos
         ]);
+    }
+
+    /**
+     * Summary of actionLike
+     * @param mixed $video_id
+     * @return string
+     */
+    public function actionLike($video_id)
+    {
+        $user_id = Yii::$app->user->id;
+        $videoLike = VideoLike::find()->isLikedDisliked($video_id, $user_id)->one();
+        
+        if (!$videoLike){
+            $this->saveLikeDislike($video_id, $user_id, VideoLike::TYPE_LIKE);
+        } else if ($videoLike->type == VideoLike::TYPE_LIKE){
+            $videoLike->delete();
+        } else {
+            $videoLike->delete();
+            $this->saveLikeDislike($video_id, $user_id, VideoLike::TYPE_LIKE);
+        }
+
+        return $this->renderAjax('_like_dislike', [
+            'model' => Video::findOne($video_id)
+        ]);
+    }
+
+    /**
+     * Summary of actionDislike
+     * @param mixed $video_id
+     * @return string
+     */
+    public function actionDislike($video_id)
+    {
+        $user_id = Yii::$app->user->id;
+        $videoLike = VideoLike::find()->isLikedDisliked($video_id, $user_id)->one();
+
+        if (!$videoLike){
+            $this->saveLikeDislike($video_id, $user_id, VideoLike::TYPE_DISLIKE);
+        } else if ($videoLike->type == VideoLike::TYPE_DISLIKE){
+            $videoLike->delete();
+        } else {
+            $videoLike->delete();
+            $this->saveLikeDislike($video_id, $user_id, VideoLike::TYPE_DISLIKE);
+        }
+        
+        return $this->renderAjax('_like_dislike', [
+            'model' => Video::findOne($video_id)
+        ]);
+    }
+
+    /**
+     * Summary of saveLikeDislike
+     * @param mixed $video_id
+     * @param mixed $user_id
+     * @param mixed $type
+     * @return void
+     */
+    protected function saveLikeDislike($video_id, $user_id, $type)
+    {
+        $videoLike = new VideoLike();
+        $videoLike->video_id = $video_id;
+        $videoLike->user_id = $user_id;
+        $videoLike->type = $type;
+        $videoLike->created_at = time();
+        $videoLike->save();
     }
 }
