@@ -7,6 +7,7 @@ use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\FileHelper;
+use yii\helpers\Url;
 use yii\imagine\Image;
 use yii\web\UploadedFile;
 
@@ -86,6 +87,11 @@ class Video extends \yii\db\ActiveRecord
     public function getVideoLink()
     {
         return Yii::$app->params['frontendUrl'] . 'storage/videos/' . $this->video_id . '.mp4';
+    }
+    
+    public function getVideoYoutubeLink()
+    {
+        return Yii::$app->params['frontendUrl'] . 'video/' . $this->video_id;
     }
     
     public function getThumbnailLink()

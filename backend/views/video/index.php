@@ -45,17 +45,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'label' => 'Visibility',
                 'content' => function ($model) {
-                    return '<div class="row align-items-center">
-                                <div class="col-md-2">' . 
-                                    (($model->getStatusLabels()[$model->status] == "Published") ? 
-                                        '<i class="fa-regular fa-eye text-success"></i> ' : 
-                                        '<i class="fa-regular fa-eye-slash text-muted"></i> ') . 
-                                '</div>
-                                <div class="col-auto">' . 
-                                    $model->getStatusLabels()[$model->status] . 
-                                '</div>
+                        return '<div class="row align-items-center">
+                                <div class="col-md-2">' .
+                            (($model->getStatusLabels()[$model->status] == "Published") ? 
+                                '<i class="fa-regular fa-eye text-success"></i> ' :
+                                '<i class="fa-regular fa-eye-slash text-muted"></i> ') .
+                            '</div>
+                                <div class="col-auto">' .
+                            $model->getStatusLabels()[$model->status] .
+                            '</div>
                             </div>';
-                }
+                    }
             ],
             //'has_thumbnail:boolean',
             //'video_name',
@@ -64,9 +64,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Date',
                 'format' => 'date',
                 'content' => function ($model) {
-                    return '<div>' . Yii::$app->formatter->asDate($model->created_at) . '<span class="d-block text-muted" style="font-size: 0.9rem">Uploaded</span></div>';
-                }
+                        return '<div>' . Yii::$app->formatter->asDate($model->created_at) . '<span class="d-block text-muted" style="font-size: 0.9rem">Uploaded</span></div>';
+                    }
             ],
+            [
+                'label' => 'Views',
+                'content' => function ($model) {
+                        return '<div class="text-end">' . $model->getViews()->count() . '</div>';
+                    }
+            ],
+            [
+                'label' => 'Likes (vs. dislikes)',
+                'content' => function ($model) {
+                        return $this->render('_video_likes', [
+                            'model' => $model
+                        ]);
+                }
+            ]
             // 'updated_at:datetime',
             //'created_by',
             // [

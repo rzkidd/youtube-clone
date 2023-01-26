@@ -16,6 +16,16 @@ $(document).ready(function () {
         }
     );
 
+    // hover like dislike
+    $('.like-dislike').hover(function () {
+            // over
+            $('.hover-like-dislike', this).css('transform', 'scale(1)');
+        }, function () {
+            // out
+            $('.hover-like-dislike', this).css('transform', 'scale(0)');
+        }
+    );
+
     $('#copy-icon').on('click', function () {
         let link = $(this).attr('data-link');
         navigator.clipboard.writeText(link);
@@ -106,5 +116,7 @@ $(document).ready(function () {
             restore();
         });
     });
+
+    
 
 });
