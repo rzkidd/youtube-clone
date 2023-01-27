@@ -62,4 +62,10 @@ class VideoQuery extends \yii\db\ActiveQuery
     {
         return $this->andWhere(['created_by' => $user_id]);
     }
+
+    public function byKeyword($keyword)
+    {
+        return $this->andWhere("ts @@ to_tsquery('english', :keyword)", ['keyword' => $keyword])
+            ->orderBy("ts_rank(ts, to_tsquery(:keyword)) DESC");
+    }
 }

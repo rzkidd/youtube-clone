@@ -2,7 +2,7 @@
 /** @var \yii\web\View $this */
 /** @var string $content */
 
-use backend\assets\AppAsset;
+use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
 AppAsset::register($this);

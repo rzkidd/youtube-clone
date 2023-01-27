@@ -2,6 +2,7 @@
 
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use yii\helpers\Url;
 
 NavBar::begin([
     'brandLabel' => '<div class="d-flex align-items-center"><i class="fa-brands fa-youtube me-2" style="color: red; font-size: 30px"></i>' . Yii::$app->name . '</div>',
@@ -113,10 +114,15 @@ if (Yii::$app->user->isGuest){
         ]
     ];
 }
-
-// }
+?>
+    <form action="<?= Url::to(['video/search']) ?>" class="input-group w-50 mx-auto search" id="search-bar">
+        <input type="text" class="form-control bg-transparent border-secondary px-3 text-light" placeholder="Search" 
+            name="keyword" value="<?= Yii::$app->request->get('keyword') ?>">
+        <button class="input-group-text px-4 border-secondary" style="background-color: var(--hover-bg-lighter);"><i class="fa-solid fa-magnifying-glass text-light"></i></button>
+    </form>
+<?php
 echo Nav::widget([
-    'options' => ['class' => 'navbar-nav ms-auto mb-2 mb-md-0'],
+    'options' => ['class' => 'navbar-nav mb-2 mb-md-0'],
     'items' => $menuItems,
 ]);
 

@@ -143,6 +143,22 @@ class VideoController extends Controller
         ]);
     }
 
+    public function actionSearch($keyword)
+    {
+        $query = Video::find()->published()->latest();
+        if ($keyword) {
+            $query->byKeyword($keyword);
+        }
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
+        ]);
+
+        $this->view->title = Yii::$app->name;
+        return $this->render('index', [
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
     /**
      * Summary of saveLikeDislike
      * @param mixed $video_id
