@@ -48,6 +48,7 @@ return [
                 'video/like/<video_id>' => '/video/like',
                 'video/dislike/<video_id>' => '/video/dislike',
                 'result' => '/video/search',
+                'history' => '/video/history',
                 'channel/<username>' => '/channel/view',
                 'channel/subscribe/<username>' => '/channel/subscribe'
             ],

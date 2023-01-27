@@ -65,7 +65,7 @@ class VideoQuery extends \yii\db\ActiveQuery
 
     public function byKeyword($keyword)
     {
-        return $this->andWhere("ts @@ to_tsquery('english', :keyword)", ['keyword' => $keyword])
+        return $this->andWhere("ts @@ to_tsquery('english', :keyword)", ['keyword' => str_replace(' ', ' & ', $keyword) ])
             ->orderBy("ts_rank(ts, to_tsquery(:keyword)) DESC");
     }
 }

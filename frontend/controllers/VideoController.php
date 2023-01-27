@@ -78,7 +78,7 @@ class VideoController extends Controller
             throw new NotFoundHttpException('Video not found');
         }
 
-        $videos = Video::find()->andWhere(['!=' ,'video_id', $video_id ])->published()->limit(10)->all();
+        $videos = Video::find()->andWhere(['!=' ,'video_id', $video_id ])->published()->byKeyword( ($model->tags) ? $model->title . " " . $model->tags : $model->title)->limit(10)->all();
 
         // save views
         $view = new VideoView();
@@ -149,6 +149,20 @@ class VideoController extends Controller
         if ($keyword) {
             $query->byKeyword($keyword);
         }
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
+        ]);
+
+        $this->view->title = Yii::$app->name;
+        return $this->render('index', [
+            'dataProvider' => $dataProvider
+        ]);
+    }
+    
+    public function actionHistory()
+    {
+        $query = Video::find()->joinWith('views', true, 'INNER JOIN')->andWhere(['user_id' => Yii::$app->user->id])->orderBy('video_view.created_at DESC');
+        // var_dump($query->createCommand()->sql);
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);

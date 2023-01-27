@@ -34,7 +34,7 @@ use yii\bootstrap5\Nav;
                     </div>
                 </div>
                 ',
-                'url' => ['/history'],
+                'url' => ['/video/history'],
                 'encode' => false
             ]
         ]
