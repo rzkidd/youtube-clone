@@ -21,7 +21,11 @@ use yii\widgets\Pjax;
                 <div class="rounded-circle w-100 bg-secondary ratio ratio-1x1"></div>
             </div>
             <div>
-                <div class="fs-5"><?= $model->createdBy->username ?></div>
+                <div class="fs-5">
+                    <a href="<?= Url::to(['channel/view', 'username' => $model->createdBy->username]) ?>" class="text-decoration-none text-light"> 
+                        <?= $model->createdBy->username ?> 
+                    </a>
+                </div>
                 <div class="text-muted">1M subcribers</div>
             </div>
             <button type="button" class="btn btn-light rounded-pill mx-3">Subscribe</button>

@@ -159,3 +159,8 @@ input {
 .video-likes span:hover {
     background-color: var(--hover-bg-lighter);
 }
+
+.channel-nav .nav-link.active {
+    border-bottom: #fff solid 3px;
+    color: #fff !important;
+}

@@ -35,13 +35,31 @@ class VideoQuery extends \yii\db\ActiveQuery
         return parent::one($db);
     }
 
+    /**
+     * Summary of latest
+     * @return Yii\db\QueryTrait
+     */
     public function latest()
     {
         return $this->orderBy(['created_at' => SORT_DESC]);
     }
 
+    /**
+     * Summary of published
+     * @return Yii\db\Query
+     */
     public function published()
     {
         return $this->andWhere(['status' => Video::STATUS_PUBLISHED]);
+    }
+
+    /**
+     * Summary of creator
+     * @param mixed $user_id
+     * @return Yii\db\Query
+     */
+    public function creator($user_id)
+    {
+        return $this->andWhere(['created_by' => $user_id]);
     }
 }

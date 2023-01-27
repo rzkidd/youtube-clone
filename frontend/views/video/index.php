@@ -8,7 +8,7 @@ use yii\widgets\ListView;
     'dataProvider' => $dataProvider,
     'itemView' => '_video_item',
     'itemOptions' => [
-        'class' => 'col-md-3'
+        'class' => 'col-md-3 mb-5'
     ],
     'options' => [
         'class' => 'row'

@@ -21,7 +21,11 @@ use yii\helpers\Url;
                 <a href="<?= Url::to(['/video/view', 'video_id' => $model->video_id]) ?>" class="text-decoration-none text-light">
                     <h6 class="card-title"><?= StringHelper::truncateWords($model->title, 5) ?></h6>
                 </a>
-                <div class="card-text text-muted"><?= $model->createdBy->username ?></div>
+                <div class="card-text text-muted">
+                    <a href="<?= Url::to(['/channel/view', 'username' => $model->createdBy->username]) ?>" class="text-decoration-none text-muted">
+                        <?= $model->createdBy->username ?>
+                    </a>
+                </div>
                 <div class="card-text text-muted">
                     <span><?= $model->getViews()->count() ?> views &middot</span>    
                     <?= Yii::$app->formatter->asRelativeTime($model->created_at) ?>
