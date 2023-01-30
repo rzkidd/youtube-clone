@@ -3,6 +3,9 @@
 namespace backend\controllers;
 
 use common\models\LoginForm;
+use common\models\Subscriber;
+use common\models\Video;
+use common\models\VideoView;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -62,7 +65,20 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $user = Yii::$app->user->identity;
+        $latestVideo = Video::find()->latest()->andWhere(['created_by' => $user->getId()])->limit(1)->one();
+        $subscribersCount = Subscriber::find()->andWhere(['channel_id' => $user->getId()])->count();
+        $viewsCount = VideoView::find()
+            ->innerJoin(Video::tableName(), 'video_view.video_id = video.video_id')
+            ->andWhere(['video.created_by' => $user->getId()])
+            ->count();
+
+        $this->view->title = 'Channel dashboard';
+        return $this->render('index', [
+            'latestVideo' => $latestVideo,
+            'subscribersCount' => $subscribersCount,
+            'viewsCount' => $viewsCount,
+        ]);
     }
 
     /**

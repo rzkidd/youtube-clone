@@ -65,6 +65,7 @@ class VideoController extends Controller
             */
         ]);
 
+        $this->view->title = 'Channel content';
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);

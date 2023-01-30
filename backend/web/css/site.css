@@ -1,5 +1,8 @@
 :root {
     --bg-color: #282828;
+    --bg-darker: #222222;
+    --bg-lighter: #333333;
+    --hover-bg-lighter: #474747;
     --hover-bg-color: #202020;
     --font-family: "Roboto", "Noto", sans-serif
 }
@@ -85,24 +88,6 @@ aside .nav-pills .nav-item .nav-link.active {
     background-color: var(--hover-bg-color) !important;
 }
 
-a[href="/site/index"]::before {
-    content: "\f0db";
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    font-size: 1.5rem;
-    margin-right: 1.5rem;
-}
-
-a[href="/video/index"]::before {
-    content: "\f03d";
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    font-size: 1.5rem;
-    margin-right: 1.5rem;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
 #table_video thead tr th a
 {
     color: #6c757d;
@@ -156,4 +141,24 @@ input {
 
 .thumbnail-options a:hover {
     color: #fff !important;
+}
+
+.title-overlay {
+    top: 85%;
+    left: 5%;
+    z-index: 1000;
+}
+
+.dashboard-video::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    border-bottom-left-radius: .375rem;
+    border-bottom-right-radius: .375rem;
+    z-index: 99;
 }

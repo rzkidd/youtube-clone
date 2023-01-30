@@ -28,7 +28,7 @@ class VideoController extends Controller
             [
                 'access' => [
                     'class' => AccessControl::class,
-                    'only' => ['like', 'dislike'],
+                    'only' => ['like', 'dislike', 'history'],
                     'rules' => [
                         [
                             'allow' => true,

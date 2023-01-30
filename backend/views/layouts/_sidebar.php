@@ -16,12 +16,20 @@ use yii\bootstrap5\Nav;
         ],
         'items' => [
             [
-                'label' => 'Dashboard',
+                'label' => '
+                <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-table-columns fs-4 me-3"></i> Dashboard
+                </div>',
                 'url' => ['site/index'],
+                'encode' => false
             ],
             [
-                'label' => 'Videos',
+                'label' => '
+                <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-video fs-4 me-3"></i> Videos
+                </div>',
                 'url' => ['/video/index'],
+                'encode' => false
             ]
         ]
     ]) ?>

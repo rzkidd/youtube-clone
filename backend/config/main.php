@@ -43,6 +43,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'site/index',
                 'video/update/<video_id>' => 'video/update'
             ],
         ],
