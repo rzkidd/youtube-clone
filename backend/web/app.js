@@ -42,6 +42,8 @@ $(document).ready(function () {
                     thumbnail.width = 100;
                     // $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
                     $(thumbnail).attr('class', 'me-3 position-absolute top-0 start-0 w-100 rounded').appendTo(imgPreviewPlaceholder);
+                    $('.video-preview').attr('poster', event.target.result);
+                    $('.thumbnail-provided').removeClass('border border-5 border-light');
                 }
                 reader.readAsDataURL(input.files[0]);
             }
@@ -52,6 +54,8 @@ $(document).ready(function () {
                 $('.thumbnail-upload').css('transform', 'scale(1)');
                 $('.thumbnail-options').css('transform', 'scale(0)');
                 $('.thumbnail-input img').css('opacity', 1);
+                $('.thumbnail-provided').addClass('border border-5 border-light');
+                $('.video-preview').attr('poster', $('.thumbnail-provided img').attr('src'));
             });
         };
 
@@ -117,6 +121,6 @@ $(document).ready(function () {
         });
     });
 
-    
+
 
 });

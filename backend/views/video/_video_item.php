@@ -11,7 +11,7 @@ use yii\helpers\Url;
     <a href="<?= Url::to(['/video/update', 'video_id' => $model->video_id]) ?>" class="text-decoration-none text-light">
         <div class="flex-shrink-0 me-3" style="width: 120px;">
             <div class="ratio ratio-16x9">
-                <video src="<?= $model->getVideoLink() ?>" allowfullscreen poster="<?= $model->getThumbnailLink() ?>"></video>
+                <img src="<?= $model->getThumbnailLink() ?>" alt="" class="rounded">
             </div>
         </div>
     </a>

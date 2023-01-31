@@ -18,7 +18,7 @@ $strDuration = $duration[0] . $duration[1];
         <div class="card w-100 p-3 text-light border-secondary" style="background-color: var(--bg-color);">
             <h5 class="card-title fw-bold">Latest video performance</h5>
             <div class="ratio ratio-16x9 rounded my-3 position-relative dashboard-video">
-                <video src="<?= $latestVideo->getVideoLink() ?>" poster="<?= $latestVideo->getThumbnailLink() ?>" class="rounded "></video>
+                <img src="<?= $latestVideo->getThumbnailLink() ?>" alt="" class="rounded">
                 <div class="title-overlay position-absolute text-light"><?= StringHelper::truncateWords($latestVideo->title, 5) ?></div>
             </div>
 

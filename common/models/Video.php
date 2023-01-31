@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\FFMpeg;
 use Imagine\Image\Box;
 use Yii;
 use yii\behaviors\BlameableBehavior;
@@ -96,9 +98,7 @@ class Video extends \yii\db\ActiveRecord
     
     public function getThumbnailLink()
     {
-        return $this->has_thumbnail ? 
-            Yii::$app->params['frontendUrl'] . 'storage/thumbnails/' . $this->video_id . '.jpg'
-            : '';
+        return Yii::$app->params['frontendUrl'] . 'storage/thumbnails/' . $this->video_id . '.jpg';
     }
 
     public function getStatusLabels()
@@ -211,6 +211,16 @@ class Video extends \yii\db\ActiveRecord
                 FileHelper::createDirectory(dirname($videoPath));
             }
             $this->video->saveAs($videoPath);
+
+            $thumbnailPath = Yii::getAlias('@frontend/web/storage/thumbnails/' . $this->video_id . '.jpg');
+            $ffmpeg = FFMpeg::create([
+                // 'ffmpeg.binaries'  => '/opt/ffmpeg/ffmpeg/ffmpeg',
+                // 'ffprobe.binaries' => '/opt/ffmpeg/ffprobe/ffprobe'
+            ]);
+            $video = $ffmpeg->open($videoPath);
+            $video
+                ->frame(TimeCode::fromSeconds(10))
+                ->save($thumbnailPath);
         }
 
         if ($this->thumbnail) {

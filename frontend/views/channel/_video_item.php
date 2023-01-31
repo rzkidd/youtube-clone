@@ -9,7 +9,7 @@ use yii\helpers\Url;
 <div class="card bg-transparent text-light border-0" >
     <a href="<?= Url::to(['/video/view', 'video_id' => $model->video_id]) ?>" class="text-decoration-none text-light">
         <div class="ratio ratio-16x9 rounded" style="width: 100%;">
-            <video src="<?= $model->getVideoLink() ?>" poster="<?= $model->getThumbnailLink() ?>" class="rounded"></video>
+            <img src="<?= $model->getThumbnailLink() ?>" alt="" class="rounded">
         </div>
         <div class="card-body d-flex p-0 pt-2 mb-3">
             <div>

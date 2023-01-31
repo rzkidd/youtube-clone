@@ -9,10 +9,10 @@ use yii\helpers\Url;
 <div class="bg-transparent text-light border-0 d-flex flex-row mt-2" >
     <a href="<?= Url::to(['/video/view', 'video_id' => $model->video_id]) ?>">
         <div class="ratio ratio-16x9 rounded" style="width: 360px;">
-            <video src="<?= $model->getVideoLink() ?>" poster="<?= $model->getThumbnailLink() ?>" class="rounded"></video>
+            <img src="<?= $model->getThumbnailLink() ?>" alt="" class="rounded">
         </div>
     </a>
-    <div class=" px-3">
+    <div class="ms-3 px-3">
         <div>
             <a href="<?= Url::to(['/video/view', 'video_id' => $model->video_id]) ?>" class="text-decoration-none text-light">
                 <h3 class="card-title "><?= StringHelper::truncateWords($model->title, 7) ?></h3>

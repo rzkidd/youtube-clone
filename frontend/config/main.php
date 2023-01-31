@@ -43,6 +43,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'debug/<controller>/<action>' => 'debug/<controller>/<action>',
                 '' => 'video/index',
                 'video/<video_id>' => 'video/view',
                 'video/like/<video_id>' => '/video/like',

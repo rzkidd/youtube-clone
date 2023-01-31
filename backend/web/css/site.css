@@ -1,9 +1,9 @@
 :root {
     --bg-color: #282828;
-    --bg-darker: #222222;
+    --bg-darker: #1F1F1F;
     --bg-lighter: #333333;
     --hover-bg-lighter: #474747;
-    --hover-bg-color: #202020;
+    --hover-bg-color: #1F1F1F;
     --font-family: "Roboto", "Noto", sans-serif
 }
 
